@@ -3,14 +3,14 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 
 
-// Register Page
+// ================= REGISTER PAGE =================
 const registerPage = (req, res) => {
 
     res.render('auth/register');
 };
 
 
-// Register User
+// ================= REGISTER USER =================
 const registerUser = async (req, res) => {
 
     try {
@@ -39,7 +39,7 @@ const registerUser = async (req, res) => {
 
         req.flash('success_msg', 'Registration successful');
 
-        res.redirect('/auth/register');
+        res.redirect('/auth/login');
 
     } catch (error) {
 
@@ -51,7 +51,75 @@ const registerUser = async (req, res) => {
 };
 
 
+// ================= LOGIN PAGE =================
+const loginPage = (req, res) => {
+
+    res.render('auth/login');
+};
+
+
+// ================= LOGIN USER =================
+const loginUser = async (req, res) => {
+
+    try {
+
+        const { email, password } = req.body;
+
+        // Check User
+        const user = await User.findOne({ email });
+
+        if (!user) {
+
+            req.flash('error_msg', 'Invalid Email');
+
+            return res.redirect('/auth/login');
+        }
+
+        // Compare Password
+        const isMatch = await bcrypt.compare(password, user.password);
+
+        if (!isMatch) {
+
+            req.flash('error_msg', 'Invalid Password');
+
+            return res.redirect('/auth/login');
+        }
+
+        // Create Session
+        req.session.user = {
+            id: user._id,
+            name: user.name,
+            email: user.email
+        };
+
+        req.flash('success_msg', 'Login successful');
+
+        res.redirect('/dashboard');
+
+    } catch (error) {
+
+        console.log(error);
+
+        res.redirect('/auth/login');
+    }
+
+};
+
+
+// ================= LOGOUT =================
+const logoutUser = (req, res) => {
+
+    req.session.destroy(() => {
+
+        res.redirect('/auth/login');
+    });
+};
+
+
 module.exports = {
     registerPage,
-    registerUser
+    registerUser,
+    loginPage,
+    loginUser,
+    logoutUser
 };

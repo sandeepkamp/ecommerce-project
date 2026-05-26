@@ -52,6 +52,9 @@ app.use((req, res, next) => {
 
     res.locals.error_msg = req.flash('error_msg');
 
+    // Logged In User
+    res.locals.user = req.session.user || null;
+
     next();
 });
 

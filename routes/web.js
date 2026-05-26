@@ -1,3 +1,5 @@
+const isAuthenticated = require('../middlewares/authMiddleware');
+
 const express = require('express');
 
 const router = express.Router();
@@ -16,5 +18,10 @@ router.get('/about', (req, res) => {
     res.render('pages/about');
 });
 
+// Dashboard
+router.get('/dashboard', isAuthenticated, (req, res) => {
+
+    res.render('pages/dashboard');
+});
 
 module.exports = router;
