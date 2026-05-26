@@ -1,31 +1,10 @@
-<!DOCTYPE html>
-<html>
+<%- include('../partials/header') %>
 
-<head>
-    <title>Login</title>
-</head>
+<div class="max-w-md mx-auto bg-white p-6 rounded shadow">
 
-<body>
-
-    <h1>Login</h1>
-
-    <!-- Success Message -->
-    <% if(success_msg.length > 0) { %>
-
-        <p style="color:green;">
-            <%= success_msg %>
-        </p>
-
-    <% } %>
-
-    <!-- Error Message -->
-    <% if(error_msg.length > 0) { %>
-
-        <p style="color:red;">
-            <%= error_msg %>
-        </p>
-
-    <% } %>
+    <h2 class="text-3xl font-bold mb-4">
+        Login
+    </h2>
 
     <form action="/auth/login" method="POST">
 
@@ -33,26 +12,24 @@
             type="email"
             name="email"
             placeholder="Email"
+            class="w-full border p-2 mb-4"
             required
         >
-
-        <br><br>
 
         <input
             type="password"
             name="password"
             placeholder="Password"
+            class="w-full border p-2 mb-4"
             required
         >
 
-        <br><br>
-
-        <button type="submit">
+        <button class="bg-blue-600 text-white px-4 py-2 rounded">
             Login
         </button>
 
     </form>
 
-</body>
+</div>
 
-</html>
+<%- include('../partials/footer') %>

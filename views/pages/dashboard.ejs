@@ -1,22 +1,15 @@
-<!DOCTYPE html>
-<html>
+<%- include('../partials/header') %>
 
-<head>
-    <title>Dashboard</title>
-</head>
+<div class="bg-white p-10 rounded shadow">
 
-<body>
+    <h1 class="text-4xl font-bold mb-4">
+        Dashboard
+    </h1>
 
-    <h1>Dashboard</h1>
+    <p class="text-gray-700">
+        Welcome <strong><%= user.name %></strong>
+    </p>
 
-    <h3>
-        Welcome <%= user.name %>
-    </h3>
+</div>
 
-    <a href="/auth/logout">
-        Logout
-    </a>
-
-</body>
-
-</html>
+<%- include('../partials/footer') %>
