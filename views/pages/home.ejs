@@ -1,14 +1,80 @@
 <%- include('../partials/header') %>
 
-<div class="bg-white p-10 rounded shadow">
+<!-- Hero Section -->
+<div class="bg-blue-600 text-white rounded-lg p-10 mb-10">
 
-    <h1 class="text-4xl font-bold mb-4">
+    <h1 class="text-5xl font-bold mb-4">
         Welcome to MyShop
     </h1>
 
-    <p class="text-gray-600">
-        Professional Ecommerce Website using Node.js, Express.js and MongoDB
+    <p class="text-lg">
+        Modern Ecommerce Website using Node.js, Express.js and MongoDB
     </p>
+
+</div>
+
+
+<!-- Products -->
+<h2 class="text-3xl font-bold mb-6">
+    Latest Products
+</h2>
+
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+    <% if(products.length > 0) { %>
+
+        <% products.forEach(product => { %>
+
+            <div class="bg-white rounded-lg shadow overflow-hidden">
+
+                <!-- Image -->
+                <img
+                    src="/uploads/<%= product.image %>"
+                    class="w-full h-60 object-cover"
+                >
+
+                <!-- Content -->
+                <div class="p-4">
+
+                    <h3 class="text-2xl font-bold mb-2">
+
+                        <%= product.name %>
+
+                    </h3>
+
+                    <p class="text-gray-600 mb-2">
+
+                        <%= product.category ? product.category.name : '' %>
+
+                    </p>
+
+                    <p class="text-blue-600 text-xl font-bold mb-4">
+
+                        ₹<%= product.price %>
+
+                    </p>
+
+                    <a
+                        href="/product/<%= product._id %>"
+                        class="bg-blue-600 text-white px-4 py-2 rounded"
+                    >
+                        View Product
+                    </a>
+
+                </div>
+
+            </div>
+
+        <% }) %>
+
+    <% } else { %>
+
+        <p>
+            No products found
+        </p>
+
+    <% } %>
 
 </div>
 

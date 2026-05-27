@@ -1,0 +1,179 @@
+<%- include('../partials/header') %>
+
+<div class="bg-white p-6 rounded shadow">
+
+    <h1 class="text-3xl font-bold mb-6">
+        Products
+    </h1>
+
+
+    <!-- Add Product Form -->
+    <form
+        action="/products/add"
+        method="POST"
+        enctype="multipart/form-data"
+        class="grid grid-cols-2 gap-4 mb-10"
+    >
+
+        <input
+            type="text"
+            name="name"
+            placeholder="Product Name"
+            class="border p-2 rounded"
+            required
+        >
+
+        <input
+            type="number"
+            name="price"
+            placeholder="Price"
+            class="border p-2 rounded"
+            required
+        >
+
+        <textarea
+            name="description"
+            placeholder="Description"
+            class="border p-2 rounded col-span-2"
+            required
+        ></textarea>
+
+        <!-- Category -->
+        <select
+            name="category"
+            class="border p-2 rounded"
+            required
+        >
+
+            <option value="">
+                Select Category
+            </option>
+
+            <% categories.forEach(category => { %>
+
+                <option value="<%= category._id %>">
+
+                    <%= category.name %>
+
+                </option>
+
+            <% }) %>
+
+        </select>
+
+        <!-- Image -->
+        <input
+            type="file"
+            name="image"
+            class="border p-2 rounded"
+            required
+        >
+
+        <button
+            class="bg-blue-600 text-white px-4 py-2 rounded col-span-2"
+        >
+            Add Product
+        </button>
+
+    </form>
+
+
+    <!-- Product Table -->
+    <table class="w-full border-collapse">
+
+        <thead>
+
+            <tr class="bg-gray-200">
+
+                <th class="border p-2">
+                    Image
+                </th>
+
+                <th class="border p-2">
+                    Name
+                </th>
+
+                <th class="border p-2">
+                    Price
+                </th>
+
+                <th class="border p-2">
+                    Category
+                </th>
+
+                <th class="border p-2">
+                    Action
+                </th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <% if(products.length > 0) { %>
+
+                <% products.forEach(product => { %>
+
+                    <tr>
+
+                        <td class="border p-2">
+
+                            <img
+                                src="/uploads/<%= product.image %>"
+                                width="70"
+                                class="rounded"
+                            >
+
+                        </td>
+
+                        <td class="border p-2">
+                            <%= product.name %>
+                        </td>
+
+                        <td class="border p-2">
+                            ₹<%= product.price %>
+                        </td>
+
+                        <td class="border p-2">
+
+                            <%= product.category ? product.category.name : '' %>
+
+                        </td>
+
+                        <td class="border p-2">
+
+                            <a
+                                href="/products/delete/<%= product._id %>"
+                                class="bg-red-500 text-white px-3 py-1 rounded"
+                            >
+                                Delete
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                <% }) %>
+
+            <% } else { %>
+
+                <tr>
+
+                    <td colspan="5" class="border p-3 text-center">
+
+                        No products found
+
+                    </td>
+
+                </tr>
+
+            <% } %>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<%- include('../partials/footer') %>
