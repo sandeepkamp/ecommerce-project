@@ -1,6 +1,6 @@
-const Product = require('../models/Product');
+const Product = require('../models/product');
 
-const Category = require('../models/Category');
+const Category = require('../models/category');
 
 
 // ================= PRODUCT PAGE =================

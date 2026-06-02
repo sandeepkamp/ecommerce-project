@@ -1,0 +1,57 @@
+<%- include('../partials/header') %>
+
+<h1 class="text-3xl font-bold mb-6">
+    Shopping Cart
+</h1>
+
+<div class="bg-white rounded shadow p-6">
+
+    <% if(cartItems.length > 0) { %>
+
+        <% cartItems.forEach(item => { %>
+
+            <div class="border-b py-4 flex justify-between">
+
+                <div>
+
+                    <h3 class="font-bold">
+                        <%= item.product.name %>
+                    </h3>
+
+                    <p>
+                        Qty: <%= item.quantity %>
+                    </p>
+
+                </div>
+
+                <div>
+
+                    ₹<%= item.product.price * item.quantity %>
+
+                </div>
+
+            </div>
+
+        <% }) %>
+
+        <div class="mt-6 text-right">
+
+            <h2 class="text-2xl font-bold">
+
+                Total: ₹<%= total %>
+
+            </h2>
+
+        </div>
+
+    <% } else { %>
+
+        <p>
+            Cart is empty
+        </p>
+
+    <% } %>
+
+</div>
+
+<%- include('../partials/footer') %>
