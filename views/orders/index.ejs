@@ -1,0 +1,56 @@
+<%- include('../partials/header') %>
+
+<h1 class="text-3xl font-bold mb-6">
+    My Orders
+</h1>
+
+<% if(orders.length > 0) { %>
+
+    <% orders.forEach(order => { %>
+
+        <div class="bg-white p-6 rounded shadow mb-6">
+
+            <div class="flex justify-between mb-4">
+
+                <h3 class="font-bold">
+                    Order #<%= order._id %>
+                </h3>
+
+                <span>
+                    <%= order.status %>
+                </span>
+
+            </div>
+
+            <% order.items.forEach(item => { %>
+
+                <div class="border-b py-2">
+
+                    <strong>
+                        <%= item.product.name %>
+                    </strong>
+
+                    - Qty:
+                    <%= item.quantity %>
+
+                </div>
+
+            <% }) %>
+
+            <div class="mt-4 font-bold">
+
+                Total: ₹<%= order.totalAmount %>
+
+            </div>
+
+        </div>
+
+    <% }) %>
+
+<% } else { %>
+
+    <p>No orders found</p>
+
+<% } %>
+
+<%- include('../partials/footer') %>
