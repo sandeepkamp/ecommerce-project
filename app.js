@@ -1,8 +1,17 @@
-require('dotenv').config();
+console.log("=== APP STARTING ===");
+console.log("PORT =", process.env.PORT);
+console.log("MONGO_URI =", process.env.MONGO_URI ? "FOUND" : "MISSING");
+console.log("SESSION_SECRET =", process.env.SESSION_SECRET ? "FOUND" : "MISSING");
 
-console.log('Application starting...');
-console.log('MONGO_URI:', process.env.MONGO_URI ? 'FOUND' : 'MISSING');
-console.log('SESSION_SECRET:', process.env.SESSION_SECRET ? 'FOUND' : 'MISSING');
+process.on("uncaughtException", err => {
+    console.error("UNCAUGHT EXCEPTION:", err);
+});
+
+process.on("unhandledRejection", err => {
+    console.error("UNHANDLED REJECTION:", err);
+});
+
+require('dotenv').config();
 
 const express = require('express');
 
@@ -72,7 +81,7 @@ app.use('/orders', require('./routes/orderRoutes'));
 
 // Server
 const PORT = process.env.PORT || 3000;
-console.log("Application starting...");
+// console.log("Application starting...");
 app.listen(PORT, () => {
 
     console.log(`Server running on port ${PORT}`);
