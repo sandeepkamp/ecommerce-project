@@ -1,5 +1,8 @@
-console.log("Application starting...");
 require('dotenv').config();
+
+console.log('Application starting...');
+console.log('MONGO_URI:', process.env.MONGO_URI ? 'FOUND' : 'MISSING');
+console.log('SESSION_SECRET:', process.env.SESSION_SECRET ? 'FOUND' : 'MISSING');
 
 const express = require('express');
 
@@ -69,7 +72,7 @@ app.use('/orders', require('./routes/orderRoutes'));
 
 // Server
 const PORT = process.env.PORT || 3000;
-
+console.log("Application starting...");
 app.listen(PORT, () => {
 
     console.log(`Server running on port ${PORT}`);
