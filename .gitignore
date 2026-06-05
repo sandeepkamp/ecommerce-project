@@ -8,8 +8,6 @@ yarn-error.log*
 lerna-debug.log*
 
 # Environment files
-.env
-.env.*
 
 # OS files
 .DS_Store
@@ -29,4 +27,4 @@ build/
 *.log
 
 # VS Code settings
-.vscode/
+config.bat
