@@ -16,7 +16,6 @@ router.get('/register', registerPage);
 
 router.post('/register', registerUser);
 
-
 // Login
 router.get('/login', loginPage);
 
