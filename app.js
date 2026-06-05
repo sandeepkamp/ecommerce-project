@@ -1,3 +1,4 @@
+console.log("Application starting...");
 require('dotenv').config();
 
 const express = require('express');
